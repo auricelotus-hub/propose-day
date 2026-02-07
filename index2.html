@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Shreya 💍</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(120deg, #ff758c, #ff7eb3);
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+
+button {
+  background: #ff4d6d;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.slide {
+  display: none;
+  font-size: 24px;
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: float 7s linear infinite;
+}
+
+@keyframes float {
+  0% { bottom: -10%; opacity: 1; }
+  100% { bottom: 110%; opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+  <!-- SLIDES -->
+  <div class="slide">Hey Shreya… 💕</div>
+
+  <div class="slide">
+    Today isn’t just another day for me.
+  </div>
+
+  <div class="slide">
+    Because today,<br>
+    I want to speak straight from my heart.
+  </div>
+
+  <div class="slide">
+    You entered my life quietly…
+  </div>
+
+  <div class="slide">
+    And somehow,<br>
+    you became my favorite part of it.
+  </div>
+
+  <div class="slide">
+    My smiles feel warmer.<br>
+    My days feel lighter.
+  </div>
+
+  <div class="slide">
+    And every future I imagine…<br>
+    has you in it 💖
+  </div>
+
+  <div class="slide">
+    So today, I won’t overthink.
+  </div>
+
+  <div class="slide">
+    Shreya Dutta Jenny Babu 💍<br><br>
+    Will you be mine —<br>
+    not just today,<br>
+    but every day my heart chooses?
+  </div>
+
+  <!-- PROPOSE BUTTON -->
+  <div class="slide">
+    <button onclick="sayYes()">Yes, Akib 💖</button>
+  </div>
+
+  <!-- YES RESPONSE -->
+  <div class="slide">
+    You just made my heart overflow 😭❤️<br><br>
+    I promise to choose you,<br>
+    respect you,<br>
+    and love you — a little more every day.
+  </div>
+
+  <!-- FINAL SECRET SLIDE (NO NEXT BUTTON) -->
+  <div class="slide">
+    I love you, Shreya ❤️<br><br>
+    Not loudly.<br>
+    Not perfectly.<br>
+    But honestly.<br><br>
+    Forever yours,<br>
+    <b>Akib</b> 💕
+  </div>
+
+  <!-- CONTROLS -->
+  <button id="startBtn" onclick="start()">Tap to start 🎵</button>
+  <button id="nextBtn" onclick="nextSlide()" style="display:none;">Next 💕</button>
+
+</div>
+
+<script>
+let slides = document.querySelectorAll(".slide");
+let current = 0;
+
+const nextTexts = [
+  "Next 💕",
+  "Keep going 😌",
+  "This matters 💖",
+  "Just a little more 🥰",
+  "Heart talking now ❤️",
+  "Almost there 💍",
+  "Read slowly 😍"
+];
+
+function start() {
+  document.getElementById("bgMusic").play();
+  document.getElementById("startBtn").style.display = "none";
+  document.getElementById("nextBtn").style.display = "inline-block";
+  showSlide();
+  setInterval(createFloatingHeart, 900);
+}
+
+function showSlide() {
+  slides.forEach(s => s.style.display = "none");
+  slides[current].style.display = "block";
+
+  // Change Next button text
+  document.getElementById("nextBtn").innerText =
+    nextTexts[Math.min(current, nextTexts.length - 1)];
+
+  // Hide Next button on proposal button slide and final slide
+  if (slides[current].querySelector("button") || current === slides.length - 1) {
+    document.getElementById("nextBtn").style.display = "none";
+  } else {
+    document.getElementById("nextBtn").style.display = "inline-block";
+  }
+}
+
+function nextSlide() {
+  if (current < slides.length - 1) {
+    current++;
+    showSlide();
+  }
+}
+
+function sayYes() {
+  explodeHearts();
+  current++;
+  showSlide();
+}
+
+function createFloatingHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+}
+
+function explodeHearts() {
+  for (let i = 0; i < 35; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = "50%";
+    heart.style.bottom = "50%";
+    heart.style.fontSize = "28px";
+    heart.style.animation = "float 2s linear";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2000);
+  }
+}
+</script>
+
+</body>
+</html>
